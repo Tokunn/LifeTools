@@ -8,6 +8,20 @@ import webbrowser
 import urllib.request
 import json
 
+
+HOUR = 5
+MINUTE = 30
+URL = "https://www.youtube.com/watch?v=qfsr0S_QGOU"
+
+
+#####DEBUG######
+DEBUG = True
+if DEBUG:
+    now = datetime.datetime.today()
+    HOUR = now.hour
+    MINUTE = now.minute + 1
+######END#######
+
 def line():
     print('*' * 60)
 
@@ -34,7 +48,7 @@ def getforecast(location):
     line()
 
 
-def displayoff():
+def offdisplay():
     #user32 = windll.user32
 
     #user32.MessageBoxA(
@@ -63,12 +77,18 @@ def displayoff():
     #time.sleep(1)
     #PostMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, DISPLAY_ON)
 
+def displayoff():
+    print("{}:{}:00 (now {})".format(HOUR, MINUTE, datetime.datetime.today()))
+    time.sleep(5)
+    offdisplay()
+
 
 
 def main():
     displayoff()
-    alarm(15, 52, "https://www.youtube.com/watch?v=qfsr0S_QGOU")
+    alarm(HOUR, MINUTE, URL)
     getforecast("090010")
+    input()
 
 if __name__ == "__main__":
     main()
